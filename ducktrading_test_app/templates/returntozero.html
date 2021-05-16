@@ -7,6 +7,16 @@
     <title>Duck Trading TEST</title>
 </head>
 <body>
-    <h1>Duck Trading Return to ZERO environment</h1>
+    <div>
+        <h1> {{user_id.first_name}},  Are you sure that you want to reset your account?</h1>
+        <h2>There is no undo function.  This is permanent!</h2>
+    </div>
+    <div>
+        <a href="/dashboard">No</a>
+        <form action="/delete/{{one_security.id}}" method='POST'>
+        {% csrf_token %}
+        <input type="submit" value="Yes! I want to reset this.">
+    </form>
+    </div>
 </body>
 </html>

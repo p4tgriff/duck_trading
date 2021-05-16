@@ -7,6 +7,42 @@
     <title>Duck Trading TEST</title>
 </head>
 <body>
-    <h1>Duck Trading SETTINGS environment</h1>
+    <div>
+        <h3>{{user_id.first_name}} update your settings.</h3>    
+        <a href="/dashboard">Dashboard</a> | <a href="/logout">Logout</a>
+    </div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div>
+        {{user_id.first.name}}
+    </div>
+    <div id="editbox">
+        <form action="update/{{user.id}}" method="POST">
+            {% csrf_token %}
+            <div class='form-group'>
+                <label for="first_name">First Name</label>
+                <input type="text" name="first_name" id="first_name" class="form-control" value="{{user_id.first_name}}" required>
+            </div>
+            <div class='form-group'>
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name id="last_name" class="form-control" value="{{user_id.last_name}}" required>
+            </div>
+            <div class='form-group'>
+                <label for="email_address">Email:</label>
+                <input type="email" name="email_address" id="email_address" class="form-control" value="{{user_id.email_address}}" required>
+            </div>
+            <div class='form-group'>
+                <label for="age">Age:</label>
+                <input type="text" name="age" id="age" class="form-control" value="{{user_id.age}}" required>
+            </div>
+            <button class="btn btn-secondary">Cancel</button>
+            <button class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </body>
 </html>

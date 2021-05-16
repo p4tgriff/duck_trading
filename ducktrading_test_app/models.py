@@ -47,6 +47,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=255)
     email_address = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
+    age = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -94,8 +95,33 @@ class Security(models.Model):
 
 class Order(models.Model):
 
-
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     security = models.ForeignKey(Security, null=True, on_delete=models.SET_NULL)
+    quantity = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class BankAccount:
+
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __init__(self, balance=200000):
+        self.balance = balance
+
+    def deposit(self, amount):
+        self.balance += amount
+        return self
+    
+    def withdraw(self, amount):
+        if(amount <= self.balance):
+            self.balance -= amount
+        else:
+            print("Insufficient funds: trade not placed")
+            redirect('/sell')
+        return self
+
+    def displayAccountInfo(self):
+        print("Balance:", self.balance)
+        return self

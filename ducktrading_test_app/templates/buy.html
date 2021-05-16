@@ -7,6 +7,16 @@
     <title>Duck Trading TEST</title>
 </head>
 <body>
-    <h1>Duck Trading BUY environment</h1>
+    <div>
+        <h1>Duck Trading BUY environment</h1>
+        <h2>So {{user_id.first_name}}: you've come to purchase more!</h2>
+</div>
+    <div>
+        <form action="/purchase" method="POST">Buy More</form>
+        <p>Company Name:{{one_security.company_name}}</p>
+        <p>Company Name:{{one_security.company_name}}</p>
+        <button>BUY</button>
+        <button>Cancel</button>
+    </div>
 </body>
 </html>

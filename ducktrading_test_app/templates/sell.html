@@ -8,5 +8,35 @@
 </head>
 <body>
     <h1>Duck Trading SELL environment</h1>
+    <div>
+        <h3>Hello {{user_id.first_name}}!  Let's edit your wish!</h3>    
+        <a href="/logout">Logout</a>
+    </div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div id="editbox">
+        <form action="/wishes/update/{{job.id}}" method="POST">
+            {% csrf_token %}
+            <div class='form-group'>
+                <label for="title">I wish for:</label>
+                <input type="text" name="title" id="title" class="form-control" value="{{job.title}}" required>
+            </div>
+            <div class='form-group'>
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="description" class="form-control" value="{{job.description}}" required>
+            </div>
+            <!-- <div class='form-group'>
+                <label for="location">Location:</label>
+                <input type="text" name="location" id="location" class="form-control" value="{{job.location}}" required>
+            </div> -->
+            <button class="btn btn-secondary">Cancel</button>
+            <button class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </body>
 </html>

@@ -7,12 +7,71 @@
     <title>Duck Trading TEST</title>
 </head>
 <body>
-    <h1>Duck Trading Dashboard environment</h1>
+    <div class="header">
+        <h2>Hello {{user_id.first_name}}!</h1>
+        <a href="/returntozero">Reset my balance to Zero</a> | <a href="/settings">Settings</a> | <a href="/logout">Logout</a> |
+        <!-- <a href="/stats"><button>View stats</button></a> -->
+        <!-- <a href="/wishes/new"><button>Make a wish!</button></a> -->
+    </div>
     <div>
-        <h3>
-            Hello {{user.firstname}!
-        </h3>
-        
+        <h3>Your trading list:</h3>
+        <h3>Your balance is: {{user.bankaccount.balance}!</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Ticker</th>
+                    <th>Current Price</th>
+                    <th>Shares Owned</th>
+                    <th>Gain/Loss</th>
+                    <th>Buy/Sell</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for one_security in all_securitys %}
+                <tr>
+                    <td>{{one_security.company_name}}</td>
+                    <td>{{one_security.ticker_symbol}}</td>
+                    <td>{{one_security.price}}</td>
+                    <td>{{one_security.owned}}</td>
+                    <td>{{one_security.gainloss}}</td>
+                    <td>{{one_security.actions}}<a href="/buy">Buy</a> | <a href="/sell/{{one_security.id}}" method='POST'>Sell</a>
+                    <td>{{one_security.id}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <h3>All Companies:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Ticker</th>
+                    <th>Current Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for one_security in all_securitys %}
+                <tr>
+                    <td>{{one_security.company_name}}</td>
+                    <td>{{one_security.ticker_symbol}}</td>
+                    <td>{{one_security.price}}</td>
+                </tr>
+                {% endfor %}
+                
+                {% for order in orders %}
+                <tr>
+                    <td>{{order.security}}</td>
+                    <td>{{order.security}}</td>
+                    <td>{{order.security}}</td>
+                    <td><a href="">Update</a></td>
+                    <td><a href="">Remove</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
