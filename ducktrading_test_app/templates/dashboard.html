@@ -15,7 +15,8 @@
     </div>
     <div>
         <h3>Your trading list:</h3>
-        <h3>Your balance is: {{user.bankaccount.balance}!</h3>
+        <h3>Your balance is: {{user_id.bankaccount.balance}}!</h3>
+        <h3>Your balance is: {{user_id.BankAccount.displayaccountinfo}}!</h3>
         <table>
             <thead>
                 <tr>
@@ -23,7 +24,7 @@
                     <th>Ticker</th>
                     <th>Current Price</th>
                     <th>Shares Owned</th>
-                    <th>Gain/Loss</th>
+                    <!-- <th>Gain/Loss</th> -->
                     <th>Buy/Sell</th>
                 </tr>
             </thead>
@@ -34,9 +35,9 @@
                     <td>{{one_security.ticker_symbol}}</td>
                     <td>{{one_security.price}}</td>
                     <td>{{one_security.owned}}</td>
-                    <td>{{one_security.gainloss}}</td>
+                    <!-- <td>{{one_security.gainloss}}</td> -->
                     <td>{{one_security.actions}}<a href="/buy">Buy</a> | <a href="/sell/{{one_security.id}}" method='POST'>Sell</a>
-                    <td>{{one_security.id}}</td>
+                    <!-- <td>{{one_security.id}}</td> -->
                 </tr>
                 {% endfor %}
             </tbody>

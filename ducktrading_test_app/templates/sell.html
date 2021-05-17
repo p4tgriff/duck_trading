@@ -7,10 +7,9 @@
     <title>Duck Trading TEST</title>
 </head>
 <body>
-    <h1>Duck Trading SELL environment</h1>
     <div>
-        <h3>Hello {{user_id.first_name}}!  Let's edit your wish!</h3>    
-        <a href="/logout">Logout</a>
+        <h3>Hello {{user_id.first_name}}!  Let's sell your {{ security.company_name }}. </h3>    
+        <a href="/dashboard">Dashboard</a> | <a href="/logout">Logout</a>
     </div>
     {% if messages %}
     <ul class="messages">
@@ -19,23 +18,21 @@
         {% endfor %}
     </ul>
     {% endif %}
+    <div>
+        <p>Name: {{ security.company_name }}</p>
+        <p>Ticker: {{ security.ticker_symbol }}</p>
+        <p>Trading Price: {{ security.price }} per share</p>
+    </div>
+
     <div id="editbox">
-        <form action="/wishes/update/{{job.id}}" method="POST">
+        <form action="/destroy/{{security.id}}" method="POST">
             {% csrf_token %}
             <div class='form-group'>
-                <label for="title">I wish for:</label>
-                <input type="text" name="title" id="title" class="form-control" value="{{job.title}}" required>
+                <label for="title"># of shares</label>
+                <input type="text" name="title" id="title" class="form-control" value="{{security.shares}}" required>
             </div>
-            <div class='form-group'>
-                <label for="description">Description:</label>
-                <input type="text" name="description" id="description" class="form-control" value="{{job.description}}" required>
-            </div>
-            <!-- <div class='form-group'>
-                <label for="location">Location:</label>
-                <input type="text" name="location" id="location" class="form-control" value="{{job.location}}" required>
-            </div> -->
             <button class="btn btn-secondary">Cancel</button>
-            <button class="btn btn-primary">Submit</button>
+            <button class="btn btn-primary">Sell</button>
         </form>
     </div>
 </body>

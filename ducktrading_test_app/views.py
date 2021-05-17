@@ -33,10 +33,15 @@ def settings(request):
     }
     return render(request, 'settings.html', context)
 
-def buy(request):
+def buy(request, security_id):
     if 'user_id' not in request.session:
         return redirect('/')
-    context = {}
+    a_security = Security.objects.get(id=security_id)
+    user_id = User.objects.get(id=request.session['user_id'])
+    context = {
+        'security': a_security,
+        'user_id': user_id
+    }
     return render(request, 'buy.html', context)
 
 def sell(request, security_id):
@@ -49,8 +54,6 @@ def sell(request, security_id):
         'user_id': user_id
     }
     return render(request, 'sell.html', context)
-    # print(request)
-    # return render(request, 'sell.html')
 
 
 def gainloss(request):

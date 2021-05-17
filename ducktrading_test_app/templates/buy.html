@@ -9,12 +9,12 @@
 <body>
     <div>
         <h1>Duck Trading BUY environment</h1>
-        <h2>So {{user_id.first_name}}: you've come to purchase more!</h2>
+        <h3>Hello {{user_id.first_name}}!  Let's sell your {{ security.company_name }}. </h3>    
 </div>
     <div>
         <form action="/purchase" method="POST">Buy More</form>
-        <p>Company Name:{{one_security.company_name}}</p>
-        <p>Company Name:{{one_security.company_name}}</p>
+        <p>Company Name:{{ security.company_name }}</p>
+        <p>Company Ticker:{{ security.company_ticker }}</p>
         <button>BUY</button>
         <button>Cancel</button>
     </div>
