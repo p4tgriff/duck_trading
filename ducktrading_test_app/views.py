@@ -14,8 +14,9 @@ def dashboard(request):
     user_id = User.objects.get(id=request.session['user_id'])
     context = {
         'all_securitys': Security.objects.all(),
-        'user_id': user_id,
-        'users_id': User.objects.all(),
+        'user': user_id,
+        'users': User.objects.all(),
+        'first_account': user_id.accounts.all()[0],
     }
     return render(request, 'dashboard.html', context)
 
@@ -90,6 +91,7 @@ def register(request):
         new_user = User.objects.create(
             first_name=request.POST['first_name'], last_name=request.POST['last_name'], email_address=request.POST['email_address'], password=hashed_pw
         )
+        new_bank_account = BankAccount.objects.create(balance=200000, user=new_user)
         request.session['user_id'] = new_user.id
     return redirect('/')
 
@@ -159,5 +161,22 @@ def customer(request, pk):
     context = {'user': user, 'orders':orders}
     return render(request, 'settings/customer.html', context)
 
-def purchase(request, security_id):
-    return render(request, '/')
+def purchase(self, amount, security_id):
+
+    # price_of_security = Security.price.all()
+
+    self.balance += amount
+    return self
+        # print('the buy worked')
+    return redirect('/dashboard')
+
+def sellsecurity(self, amount, security_id):
+    if(amount <= self.balance):
+        self.balance -= amount
+    else:
+        print("Insufficient funds: trade not placed")
+    redirect('/sell')
+    return self
+    # self.balance -= amount
+    # return self
+    # return redirect('/dashboard')

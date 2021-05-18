@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <title>Duck Trading TEST</title>
 </head>
 <body>
@@ -21,17 +23,17 @@
     <div>
         <p>Name: {{ security.company_name }}</p>
         <p>Ticker: {{ security.ticker_symbol }}</p>
-        <p>Trading Price: {{ security.price }} per share</p>
+        <p>Trading Price: ${{ security.price }} per share</p>
     </div>
 
     <div id="editbox">
-        <form action="/destroy/{{security.id}}" method="POST">
+        <form action="/sellsecurity/{{security.id}}" method="POST">
             {% csrf_token %}
             <div class='form-group'>
                 <label for="title"># of shares</label>
                 <input type="text" name="title" id="title" class="form-control" value="{{security.shares}}" required>
             </div>
-            <button class="btn btn-secondary">Cancel</button>
+            <button><a href="/dashboard">Cancel</a></button>
             <button class="btn btn-primary">Sell</button>
         </form>
     </div>

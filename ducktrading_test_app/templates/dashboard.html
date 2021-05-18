@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="static/css/style.css"> -->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <title>Duck Trading TEST</title>
 </head>
 <body>
     <div class="header">
-        <h2>Hello {{user_id.first_name}}!</h1>
+        <!-- <h2>Hello {{user_id.first_name}}!</h1> -->
+        <h2>Hello {{user.first_name}}!</h1>
         <a href="/returntozero">Reset my balance to Zero</a> | <a href="/settings">Settings</a> | <a href="/logout">Logout</a> |
         <!-- <a href="/stats"><button>View stats</button></a> -->
         <!-- <a href="/wishes/new"><button>Make a wish!</button></a> -->
     </div>
-    <div>
-        <h3>Your trading list:</h3>
-        <h3>Your balance is: {{user_id.bankaccount.balance}}!</h3>
-        <h3>Your balance is: {{user_id.BankAccount.displayaccountinfo}}!</h3>
+    <div id="dashboard">
+        <h3>Your balance is: ${{first_account.balance}}!</h3>
+        <h3>Trading list:</h3>
         <table>
             <thead>
                 <tr>
@@ -33,17 +36,17 @@
                 <tr>
                     <td>{{one_security.company_name}}</td>
                     <td>{{one_security.ticker_symbol}}</td>
-                    <td>{{one_security.price}}</td>
+                    <td>${{one_security.price}}</td>
                     <td>{{one_security.owned}}</td>
                     <!-- <td>{{one_security.gainloss}}</td> -->
-                    <td>{{one_security.actions}}<a href="/buy">Buy</a> | <a href="/sell/{{one_security.id}}" method='POST'>Sell</a>
+                    <td>{{one_security.actions}}<a href="/buy/{{one_security.id}}">Buy</a> | <a href="/sell/{{one_security.id}}" method='POST'>Sell</a>
                     <!-- <td>{{one_security.id}}</td> -->
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-    <div>
+    <!-- <div>
         <h3>All Companies:</h3>
         <table>
             <thead>
@@ -73,6 +76,6 @@
                 {% endfor %}
             </tbody>
         </table>
-    </div>
+    </div> -->
 </body>
 </html>

@@ -17,10 +17,11 @@ urlpatterns = [
     # path('delete/<int:security_id>', views.delete),
     path('delete', views.delete),
     path('reset', views.reset),
-    path('update/{{user.id}}', views.update),
+    path('update/{{user_id}}', views.update),
     path('customer/<str:pk>/', views.customer),
-    path('purchase', views.purchase),
+    path('purchase/<int:security_id>', views.purchase),
     path('destory/<int:security_id>', views.destroy),
+    path('sellsecurity/<int:security_id>', views.sellsecurity),
 ]
 
 

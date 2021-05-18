@@ -4,19 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <title>Duck Trading TEST</title>
 </head>
 <body>
     <div>
-        <h1>Duck Trading BUY environment</h1>
         <h3>Hello {{user_id.first_name}}!  Let's sell your {{ security.company_name }}. </h3>    
-</div>
+        <a href="/dashboard">Dashboard</a> | <a href="/logout">Logout</a>
+    </div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <div>
-        <form action="/purchase" method="POST">Buy More</form>
-        <p>Company Name:{{ security.company_name }}</p>
-        <p>Company Ticker:{{ security.company_ticker }}</p>
-        <button>BUY</button>
-        <button>Cancel</button>
+        <p>Name: {{ security.company_name }}</p>
+        <p>Ticker: {{ security.ticker_symbol }}</p>
+        <p>Trading Price: ${{ security.price }} per share</p>
+    </div>
+
+    <div id="editbox">
+        <form action="/purchase/{{security.id}}" method="POST">
+            {% csrf_token %}
+            <div class='form-group'>
+                <label for="title"># of shares</label>
+                <input type="text" name="title" id="title" class="form-control" value="{{security.shares}}" required>
+            </div>
+            <button><a href="/dashboard">Cancel</a></button>
+            <button class="btn btn-primary">Buy</button>
+        </form>
     </div>
 </body>
 </html>

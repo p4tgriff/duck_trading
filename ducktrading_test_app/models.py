@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models 
 import re
 import bcrypt
 
@@ -47,7 +47,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=255)
     email_address = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
-    age = models.IntegerField()
+    age = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -98,31 +98,36 @@ class Order(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     security = models.ForeignKey(Security, null=True, on_delete=models.SET_NULL)
     quantity = models.IntegerField(null=True)
+    total_amount = models.DecimalField(max_digits=12, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class BankAccount:
+class BankAccount(models.Model):
 
-    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, related_name="accounts", on_delete=models.CASCADE)
+    balance = models.DecimalField(default=200000.00, max_digits=12, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __init__(self, balance=200000):
-        self.balance = balance
+    # def __str__(self):
+    #     return self.user
 
-    def deposit(self, amount):
-        self.balance += amount
-        return self
+    # def __init__(self, balance=200000):
+    #     self.balance = balance
+
+    # def deposit(self, amount):
+    #     self.balance += amount
+    #     return self
     
-    def withdraw(self, amount):
-        if(amount <= self.balance):
-            self.balance -= amount
-        else:
-            print("Insufficient funds: trade not placed")
-            redirect('/sell')
-        return self
+    # def withdraw(self, amount):
+    #     if(amount <= self.balance):
+    #         self.balance -= amount
+    #     else:
+    #         print("Insufficient funds: trade not placed")
+    #         redirect('/sell')
+    #     return self
 
-    def displayAccountInfo(self):
-        print("Balance:", self.balance)
-        return self
+    # def displayAccountInfo(self):
+    #     print("Balance:", self.balance)
+    #     return self
 
