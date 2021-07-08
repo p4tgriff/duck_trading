@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 import bcrypt
 
+import yfinance as yf
+
 from .models import *
 
 
@@ -77,7 +79,6 @@ def login(request):
     return redirect('/')
 
 def register(request):
-
     errors = User.objects.basic_validator(request.POST)
     if len(errors) > 0:
         for k, v in errors.items():
@@ -162,6 +163,7 @@ def customer(request, pk):
     return render(request, 'settings/customer.html', context)
 
 def purchase(self, amount, security_id):
+    # if request.method == 'POST':
 
     # price_of_security = Security.price.all()
 
@@ -180,3 +182,6 @@ def sellsecurity(self, amount, security_id):
     # self.balance -= amount
     # return self
     # return redirect('/dashboard')
+
+def stockinfo(self, ):
+    print()

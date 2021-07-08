@@ -1,6 +1,7 @@
 from django.db import models
 import re
 import bcrypt
+import yfinance as yf
 
 
 class UserManager(models.Manager):
