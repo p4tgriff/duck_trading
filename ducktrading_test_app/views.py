@@ -173,7 +173,7 @@ def purchase(self, amount, security_id):
     return redirect('/dashboard')
 
 def sellsecurity(self, amount, security_id):
-    if(amount <= self.balance):
+    if amount <= self.balance:
         self.balance -= amount
     else:
         print("Insufficient funds: trade not placed")
