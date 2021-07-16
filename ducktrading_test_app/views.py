@@ -1,10 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 import bcrypt
-
+import pandas as pd
+from datetime import datetime
+from .models import *
 import yfinance as yf
 
-from .models import *
+def microsoftget():
+    msft = yf.Ticker("MSFT")
+# get stock info
+    print(msft.info)
 
 
 def index(request):
@@ -183,5 +188,9 @@ def sellsecurity(self, amount, security_id):
     # return self
     # return redirect('/dashboard')
 
-def stockinfo(self, ):
-    print()
+def stockinfo(self):
+    msft = yf.Ticker('msft')
+    print(stockinfo)
+
+def search(request):
+    return render(request, 'search.html')
